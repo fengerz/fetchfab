@@ -1,0 +1,1 @@
+export { ProductAddToCollection } from "./ProductAddToCollection";

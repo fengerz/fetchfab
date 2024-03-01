@@ -1,0 +1,13 @@
+export const LANDING_ROUTE = "/";
+export const LOGIN_ROUTE = "/login";
+export const REGISTRATION_ROUTE = "/registration";
+export const PRODUCTS_ROUTE = "/3d-models";
+export const TAG_ROUTE = "/tags";
+export const USER_ROUTE = "/user";
+export const CATEGORY_ROUTE = "/categories";
+export const COLLECTIONS_ROUTE = "/collections";
+export const LIKES_ROUTE = "/likes";
+export const MODELS_ROUTE = "/models";
+export const POPULAR_ROUTE = "/popular";
+export const SEARCH_ROUTE = "/search";
+export const NOT_FOUND_ROUTE = "/404";
