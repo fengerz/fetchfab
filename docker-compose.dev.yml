@@ -1,0 +1,84 @@
+version: "3.8"
+
+networks:
+  fetchfab-net:
+    name: fetchfab
+    driver: bridge
+
+services:
+  # Nginx Proxy Server  
+  nginx:
+    build:
+      context: ./config/nginx
+      dockerfile: Dockerfile
+      args:
+        - UID=${UID:-1000}
+        - GID=${GID:-1000}
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - ./backend:/var/www/html:delegated
+      - ./frontend/dist:/var/www/dist:delegated
+      - ./config/nginx/development/default.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - fetchfab-net
+  
+  # Frontend: NodeJS (npm)
+  npm:
+    image: node:alpine
+    tty: true
+    volumes:
+      - ./frontend:/usr/app
+    ports:
+      - 5173:5173
+    working_dir: /usr/app
+    entrypoint: [ 'npm', 'run', 'dev' ]
+    networks:
+      - fetchfab-net
+
+  # Backend: PHP, Composer, Laravel (artisan)
+  php:
+    build:
+      context: ./config/php
+      dockerfile: Dockerfile
+      args:
+        - UID=${UID:-1000}
+        - GID=${GID:-1000}
+    restart: always
+    volumes:
+      - ./backend:/var/www/html:delegated
+      - ./config/php/development/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
+    networks:
+      - fetchfab-net
+
+  # Backend: MySQL/MariaDB database
+  mysql:
+    image: mariadb:10.6
+    tty: true
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=fetchfab
+      - MYSQL_USER=fetchfab
+      - MYSQL_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=secret
+    volumes:
+      - ./database:/var/lib/mysql
+    networks:
+      - fetchfab-net
+
+  # Backend: phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - 8185:80
+    depends_on:
+      - mysql
+    environment:
+      - PMA_ARBITRARY=1
+      - UPLOAD_LIMIT=50M
+    networks:
+      - fetchfab-net
