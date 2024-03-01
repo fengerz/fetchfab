@@ -3,7 +3,3 @@ database/*
 .DS_Store
 .idea
 .vscode
-
-frontend
-
-backend
