@@ -141,13 +141,15 @@ class ProductController extends Controller
         $products = collect([]);
 
         foreach ($categories as $category) {
-            $top_product = $category
-                ->products
-                ->loadCount('likes')
-                ->sortByDesc('likes_count')
-                ->first();
-
-            $products->push($top_product);
+            if ($category->products()->count() > 0) {
+                $top_product = $category
+                    ->products
+                    ->loadCount('likes')
+                    ->sortByDesc('likes_count')
+                    ->first();
+    
+                $products->push($top_product);
+            }
         }
 
         return ProductResource::collection($products);
