@@ -32,7 +32,7 @@ export const ProductsFilters: FC = () => {
     useFetchCategoriesQuery("");
 
   const category = searchParams.get("category") || categorySlug;
-  const period = searchParams.get("period") || 31;
+  const period = searchParams.get("period") || 365;
   const sort = searchParams.get("sort") || "likeCount";
 
   const isSearchRoute =

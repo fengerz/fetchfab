@@ -58,6 +58,7 @@ const ModelView: FC<ModelViewProps> = ({ src, poster }) => {
       shadow-intensity="1"
       camera-controls
       auto-rotate
+      autoplay
     >
       <div className="progress_bar hide" slot="progress-bar">
         <div className="update_bar"></div>

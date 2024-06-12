@@ -21,6 +21,7 @@ declare global {
       ar?: boolean;
       id?: string;
       alt?: string;
+      autoplay?: boolean;
     }
   }
 }

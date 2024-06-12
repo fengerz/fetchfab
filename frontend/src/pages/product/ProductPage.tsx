@@ -110,7 +110,7 @@ const ProductPage = () => {
               <Box
                 sx={{
                   width: "100%",
-                  height: "750px",
+                  height: "75vh",
                   background: "radial-gradient(circle, #555 0%, #111 100%)",
                   borderRadius: "0.25rem",
                 }}

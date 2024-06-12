@@ -77,6 +77,7 @@ const LandingPage = () => {
                 ios-src="/example/3d.usdz"
                 poster="/example/3d.webp"
                 shadow-intensity="1"
+                camera-controls
                 auto-rotate
               ></model-viewer>
             </Grid>

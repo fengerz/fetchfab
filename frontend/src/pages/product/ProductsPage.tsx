@@ -18,7 +18,7 @@ const ProductsPage = () => {
   const query = searchParams.get("query") || undefined;
   const category = searchParams.get("category") || categorySlug;
   const tag = searchParams.get("tag") || tagSlug;
-  const period = searchParams.get("period") || 31;
+  const period = searchParams.get("period") || 365;
   const sort = searchParams.get("sort") || "likeCount";
   const page = searchParams.get("page") || 1;
 
